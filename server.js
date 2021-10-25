@@ -41,8 +41,7 @@ app.post('/register', async (req, res) => {
         res.redirect('/login')
     } catch(err){
         console.log(err.message);
-        res.redirect('/register')
-        
+        res.redirect('/register')   
     }
     console.log(users)
 
