@@ -30,8 +30,7 @@ app.get('/register',(req,res) =>{
 
 app.post('/register', async (req, res) => {
     try {
-
-        const hashedPassword = await bcrypt.hash(req.body.hashedPassword, 10) // async        
+        const hashedPassword = await bcrypt.hash(req.body.password, 10) // async        
         
         users.push({
             id: Date.now().toString(),
@@ -40,8 +39,8 @@ app.post('/register', async (req, res) => {
             password: hashedPassword
         })
         res.redirect('/login')
-    } catch{
-        console.log('fail');
+    } catch(err){
+        console.log(err.message);
         res.redirect('/register')
         
     }
