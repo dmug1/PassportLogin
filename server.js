@@ -48,7 +48,7 @@ const users = []
 app.post('/login', passport.authenticate(
         'local',        
         {
-                successRedirect: '/'
+            successRedirect: '/'
             ,failureRedirect:'/login'
             ,failureFlash: true
         }
