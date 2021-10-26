@@ -34,7 +34,7 @@ app.use(passport.session())
 const users = []
 
  //set routes
- app.get('/',(req,res) =>{
+ app.get('/',checkAuthenticated,(req,res) =>{
     res.render('index.ejs', {name: req.user.name})
 })
 
@@ -45,16 +45,21 @@ const users = []
 })
 
 
-app.post('/login', passport.authenticate('local',{
-    successRedirect: '/'
-    ,failureRedirect:'/login'
-    ,failureFlash: true
-}))
+app.post('/login', passport.authenticate(
+        'local',        
+        {
+                successRedirect: '/'
+            ,failureRedirect:'/login'
+            ,failureFlash: true
+        }
+    )
+)
 
 function checkAuthenticated(req, res, next){
     if (req.isAuthenticated()){
         return next()
     }
+    res.redirect('/login')
 }
 
 //set login register
